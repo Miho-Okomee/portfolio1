@@ -391,6 +391,175 @@
       letter-spacing: 0.05em;
     }
 
+    /* ========== WORKFLOW ========== */
+    .workflow-section {
+      padding: var(--spacing-xl) 20px;
+      background: #FFFFFF;
+    }
+    .workflow-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .workflow-header {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+    .workflow-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      margin: 0 0 16px 0;
+      color: var(--color-text-dark);
+      letter-spacing: -0.01em;
+    }
+    .workflow-header p {
+      font-size: 1.125rem;
+      color: var(--color-text-gray);
+      margin: 0;
+    }
+    .workflow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .workflow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      position: relative;
+    }
+    .workflow-step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 64px;
+    }
+    .workflow-step-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .workflow-step-icon.auto {
+      background: linear-gradient(135deg, #C9A961, #A08555);
+      color: #FFFFFF;
+    }
+    .workflow-step-icon.manual {
+      background: linear-gradient(135deg, #6B6B6B, #4A4A4A);
+      color: #FFFFFF;
+    }
+    .workflow-step-icon.start,
+    .workflow-step-icon.end {
+      background: var(--color-bg-beige);
+      color: var(--color-text-dark);
+      border: 2px solid var(--color-primary);
+    }
+    .workflow-connector {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--color-primary), rgba(201, 169, 97, 0.3));
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+    .workflow-step-content {
+      flex: 1;
+      padding: 16px 0 40px 0;
+    }
+    .workflow-step-badge {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .badge-auto {
+      background: rgba(201, 169, 97, 0.15);
+      color: var(--color-primary);
+    }
+    .badge-manual {
+      background: rgba(107, 107, 107, 0.15);
+      color: var(--color-text-gray);
+    }
+    .workflow-step-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-text-dark);
+      margin: 0 0 8px 0;
+    }
+    .workflow-step-desc {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--color-text-gray);
+      margin: 0;
+    }
+    .workflow-step-desc strong {
+      color: var(--color-text-dark);
+    }
+    .workflow-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .workflow-tool-tag {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      background: var(--color-bg-beige);
+      color: var(--color-text-gray);
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+    .workflow-summary {
+      margin-top: 40px;
+      padding: 32px 40px;
+      background: var(--color-bg-beige);
+      border-radius: 2px;
+      border-left: 4px solid var(--color-primary);
+    }
+    .workflow-summary h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--color-text-dark);
+      margin: 0 0 16px 0;
+    }
+    .workflow-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .workflow-stat {
+      text-align: center;
+    }
+    .workflow-stat-value {
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .workflow-stat-label {
+      font-size: 0.875rem;
+      color: var(--color-text-gray);
+    }
+    @media (max-width: 600px) {
+      .workflow-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .workflow-summary {
+        padding: 24px;
+      }
+    }
+
     /* ========== TESTIMONIALS ========== */
     .testimonials-section {
       padding: var(--spacing-xl) 20px;
@@ -652,6 +821,7 @@
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#workflow" class="nav-link">Workflow</a></li>
         <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -786,6 +956,146 @@
     </div>
   </section>
 
+  <!-- ========== WORKFLOW SECTION ========== -->
+  <section class="workflow-section" id="workflow">
+    <div class="workflow-container">
+      <div class="workflow-header">
+        <h2>Instagram Auto-Posting Workflow</h2>
+        <p>手動作業は週1回・10分だけ。あとは全自動でリールを届けます</p>
+      </div>
+
+      <div class="workflow-steps">
+
+        <!-- STEP 0: Start -->
+        <div class="workflow-step">
+          <div class="workflow-step-left">
+            <div class="workflow-step-icon start">📱</div>
+            <div class="workflow-connector"></div>
+          </div>
+          <div class="workflow-step-content">
+            <div class="workflow-step-title">カメラロール</div>
+            <p class="workflow-step-desc">撮影した写真・動画がすべての起点です。スマホで普段通り撮るだけでOK。</p>
+          </div>
+        </div>
+
+        <!-- STEP 1: Auto - Google Photos -->
+        <div class="workflow-step">
+          <div class="workflow-step-left">
+            <div class="workflow-step-icon auto">①</div>
+            <div class="workflow-connector"></div>
+          </div>
+          <div class="workflow-step-content">
+            <span class="workflow-step-badge badge-auto">自動</span>
+            <div class="workflow-step-title">Google フォト：AIアルバム分類</div>
+            <p class="workflow-step-desc">
+              AIが写真を自動解析し、<strong>「旅行」「グルメ」「日常」</strong>などのテーマ別アルバムに振り分けます。
+              手動でフォルダ整理する手間がゼロになります。
+            </p>
+            <div class="workflow-tools">
+              <span class="workflow-tool-tag">Google フォト</span>
+              <span class="workflow-tool-tag">AI 自動分類</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Manual - CapCut -->
+        <div class="workflow-step">
+          <div class="workflow-step-left">
+            <div class="workflow-step-icon manual">✂</div>
+            <div class="workflow-connector"></div>
+          </div>
+          <div class="workflow-step-content">
+            <span class="workflow-step-badge badge-manual">手動・週1回のみ</span>
+            <div class="workflow-step-title">CapCut：動画編集（約10分）</div>
+            <p class="workflow-step-desc">
+              分類済みアルバムから素材を選び、CapCutのテンプレートを使って
+              <strong>リール動画を10分で完成</strong>させます。
+              テンプレート活用で編集スキル不要、センスある仕上がりに。
+            </p>
+            <div class="workflow-tools">
+              <span class="workflow-tool-tag">CapCut</span>
+              <span class="workflow-tool-tag">テンプレート</span>
+              <span class="workflow-tool-tag">週1回・10分</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Auto - Later -->
+        <div class="workflow-step">
+          <div class="workflow-step-left">
+            <div class="workflow-step-icon auto">②</div>
+            <div class="workflow-connector"></div>
+          </div>
+          <div class="workflow-step-content">
+            <span class="workflow-step-badge badge-auto">自動</span>
+            <div class="workflow-step-title">Later：最適な日時に自動スケジュール投稿</div>
+            <p class="workflow-step-desc">
+              動画をLaterにアップするだけで、<strong>フォロワーのアクティブ時間帯</strong>を分析して
+              最適な日時に自動投稿。投稿し忘れも深夜投稿もなくなります。
+            </p>
+            <div class="workflow-tools">
+              <span class="workflow-tool-tag">Later</span>
+              <span class="workflow-tool-tag">スケジュール投稿</span>
+              <span class="workflow-tool-tag">エンゲージメント最適化</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Auto - AI Caption -->
+        <div class="workflow-step">
+          <div class="workflow-step-left">
+            <div class="workflow-step-icon auto">③</div>
+            <div class="workflow-connector"></div>
+          </div>
+          <div class="workflow-step-content">
+            <span class="workflow-step-badge badge-auto">自動 ＋ 軽く確認のみ</span>
+            <div class="workflow-step-title">AIハッシュタグ＆キャプション提案</div>
+            <p class="workflow-step-desc">
+              AIが動画の内容を解析し、<strong>最適なハッシュタグとキャプション文章を自動生成</strong>。
+              内容を軽く確認してOKを押すだけ。ゼロからの文章作成は不要です。
+            </p>
+            <div class="workflow-tools">
+              <span class="workflow-tool-tag">Later AI</span>
+              <span class="workflow-tool-tag">ハッシュタグ自動生成</span>
+              <span class="workflow-tool-tag">キャプション作成</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: End -->
+        <div class="workflow-step">
+          <div class="workflow-step-left">
+            <div class="workflow-step-icon end">📸</div>
+          </div>
+          <div class="workflow-step-content" style="padding-bottom: 0;">
+            <div class="workflow-step-title">Instagram リール 自動投稿完了！</div>
+            <p class="workflow-step-desc">毎週コンスタントに高品質なリールが投稿され、フォロワー数・エンゲージメントが自然に伸びていきます。</p>
+          </div>
+        </div>
+
+      </div><!-- /.workflow-steps -->
+
+      <div class="workflow-summary">
+        <h3>このワークフローで実現できること</h3>
+        <div class="workflow-summary-grid">
+          <div class="workflow-stat">
+            <div class="workflow-stat-value">10<span style="font-size:1rem">分</span></div>
+            <div class="workflow-stat-label">週あたりの手動作業</div>
+          </div>
+          <div class="workflow-stat">
+            <div class="workflow-stat-value">3<span style="font-size:1rem">ステップ</span></div>
+            <div class="workflow-stat-label">完全自動化ステップ数</div>
+          </div>
+          <div class="workflow-stat">
+            <div class="workflow-stat-value">週<span style="font-size:1rem">複数</span></div>
+            <div class="workflow-stat-label">安定した投稿頻度</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ========== TESTIMONIALS SECTION ========== -->
   <section class="testimonials-section" id="testimonials">
     <div class="testimonials-container">
@@ -861,6 +1171,13 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-social">
+        <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
         <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -935,7 +1252,7 @@
     }, observerOptions);
 
     // Observe skill items, project cards, and testimonial cards
-    document.querySelectorAll('.skill-item, .project-card, .testimonial-card').forEach(el => {
+    document.querySelectorAll('.skill-item, .project-card, .testimonial-card, .workflow-step').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
