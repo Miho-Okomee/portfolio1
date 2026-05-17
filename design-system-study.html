@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>デザインシステム 学習ガイド</title>
+  <title>デザインシステム ＆ Claude Design 学習ガイド</title>
   <style>
     :root {
       --primary: #C9A961;
@@ -583,6 +583,213 @@
     }
     .tip-text { font-size: 0.875rem; line-height: 1.6; padding-top: 4px; }
 
+    /* ── CLAUDE DESIGN ── */
+    .cd-section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 48px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .cd-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #DA7756, #E8A87C, #DA7756);
+    }
+    .cd-new-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FDF0EB;
+      color: #DA7756;
+      border: 1px solid rgba(218,119,86,0.35);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+    .cd-intro h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cd-intro h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: #DA7756;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .cd-intro > p { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.7; }
+
+    /* Compare */
+    .cd-compare {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .compare-box { padding: 20px; border-radius: 10px; }
+    .compare-old { background: #F5F5F5; }
+    .compare-new { background: #FDF0EB; border: 1px solid rgba(218,119,86,0.3); }
+    .compare-box h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; }
+    .compare-old h4 { color: var(--muted); }
+    .compare-new h4 { color: #DA7756; }
+    .compare-point { font-size: 0.82rem; color: var(--muted); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+    .compare-point::before { content: '✕'; color: #ccc; font-size: 0.7rem; flex-shrink: 0; }
+    .compare-point.good::before { content: '✓'; color: #52B788; }
+    .compare-point.good { color: var(--text); }
+    .compare-arrow-box { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.8rem; }
+
+    /* Workflow */
+    .cd-workflow-title { font-size: 0.9rem; color: var(--muted); margin-bottom: 16px; text-align: center; font-weight: 500; }
+    .workflow-steps {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 32px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .workflow-step {
+      flex: 1;
+      min-width: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 0 8px;
+    }
+    .workflow-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 24px;
+      color: #DA7756;
+      font-size: 1rem;
+      z-index: 2;
+    }
+    .workflow-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+    .wf1 { background: #EBF4FF; }
+    .wf2 { background: #FDF0EB; }
+    .wf3 { background: #E8F8F0; }
+    .wf4 { background: #F0EEFF; }
+    .wf5 { background: #FFF3EA; }
+    .workflow-name { font-weight: 700; font-size: 0.82rem; margin-bottom: 3px; }
+    .workflow-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+    .workflow-sublabel {
+      margin-top: 6px;
+      font-size: 0.68rem;
+      color: #DA7756;
+      background: #FDF0EB;
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+
+    /* 3 Features */
+    .cd-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+    .cd-feature {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 20px;
+      border-top: 3px solid #DA7756;
+    }
+    .cd-feature-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .cd-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+    .cd-feature p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .cd-feature ul { margin-top: 8px; padding-left: 0; list-style: none; }
+    .cd-feature ul li { font-size: 0.78rem; color: var(--muted); padding: 2px 0; display: flex; align-items: center; gap: 6px; }
+    .cd-feature ul li::before { content: '▸'; color: #DA7756; font-size: 0.65rem; flex-shrink: 0; }
+
+    /* Who is it for */
+    .cd-roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+    .cd-role {
+      text-align: center;
+      padding: 16px 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: box-shadow 0.2s;
+    }
+    .cd-role:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .cd-role-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .cd-role h5 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+    .cd-role p { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+    /* Export diagram */
+    .export-diagram {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .export-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .export-chip span { font-size: 1rem; }
+
+    /* Phase Integration */
+    .cd-phase-integration {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 20px 24px;
+      border-left: 4px solid #DA7756;
+    }
+    .cd-phase-integration h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 14px; color: #DA7756; }
+    .cd-phase-rows { display: flex; flex-direction: column; gap: 10px; }
+    .cd-phase-row { display: flex; align-items: flex-start; gap: 12px; font-size: 0.875rem; }
+    .cd-phase-tag {
+      padding: 3px 11px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cd-limits {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: #FFFBF0;
+      border: 1px solid #F0E4A0;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #7A6A20;
+    }
+    .cd-limits h5 { font-weight: 600; margin-bottom: 6px; }
+    .cd-limits ul { padding-left: 18px; }
+    .cd-limits li { margin-bottom: 3px; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .timeline::before { left: 0; }
@@ -596,6 +803,10 @@
       .tips-grid { grid-template-columns: 1fr; }
       .summary-bar-inner { gap: 20px; }
       .summary-divider { width: 40px; height: 1px; }
+      .cd-features { grid-template-columns: 1fr; }
+      .cd-roles { grid-template-columns: 1fr 1fr; }
+      .cd-compare { grid-template-columns: 1fr; }
+      .compare-arrow-box { transform: rotate(90deg); height: 32px; }
     }
   </style>
 </head>
@@ -605,8 +816,8 @@
   <header class="header">
     <div class="header-content">
       <div class="header-badge">Study Guide</div>
-      <h1><span>デザインシステム</span>完全学習ガイド</h1>
-      <p>1日2時間で身につける、体系的な学習ロードマップ</p>
+      <h1><span>デザインシステム</span> ＆ Claude Design<br>完全学習ガイド</h1>
+      <p>1日2時間で身につける、体系的な学習ロードマップ ＋ Anthropic Labs 新ツール徹底図解</p>
     </div>
   </header>
 
@@ -686,6 +897,163 @@
         <div class="ds-def-card">
           <h4>有名な例</h4>
           <p>Material Design (Google)、Ant Design、Tailwind、Apple HIG などが代表的。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLAUDE DESIGN SECTION -->
+    <div class="cd-section">
+      <div class="cd-intro">
+        <div class="cd-new-badge">⚡ Anthropic Labs 新プロダクト</div>
+        <h2>Claude Design — AI協働ビジュアル制作ツール</h2>
+        <p>Claudeと対話しながらUIモックアップ・スライド・LPを作れる画期的なツール。ブランドのデザインシステムを自動継承し、共同編集からエクスポート、Claude Codeへの引き継ぎまで一気通貫で対応。</p>
+      </div>
+
+      <!-- 従来 vs Claude Design -->
+      <div class="cd-compare">
+        <div class="compare-box compare-old">
+          <h4>従来のAI画像生成</h4>
+          <div class="compare-point">プロンプトを入れて画像を出力するだけ</div>
+          <div class="compare-point">毎回見た目がバラバラ</div>
+          <div class="compare-point">ブランドの一貫性を保てない</div>
+          <div class="compare-point">実装への引き継ぎが別途必要</div>
+          <div class="compare-point">編集はゼロから再生成</div>
+        </div>
+        <div class="compare-arrow-box">→</div>
+        <div class="compare-box compare-new">
+          <h4>Claude Design</h4>
+          <div class="compare-point good">会話ベースで反復・改善できる</div>
+          <div class="compare-point good">デザインシステムを自動継承</div>
+          <div class="compare-point good">ブランドの一貫性を担保</div>
+          <div class="compare-point good">Claude Code へ直接引き継ぎ</div>
+          <div class="compare-point good">インラインコメントで部分編集</div>
+        </div>
+      </div>
+
+      <!-- ワークフロー図 -->
+      <div class="cd-workflow-title">「企画 → デザイン → 共有 → 実装」を一気通貫でつなぐワークフロー</div>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="workflow-icon wf1">💬</div>
+          <div class="workflow-name">①自然言語で指示</div>
+          <div class="workflow-desc">「サウナタイマーのUIを作って」と入力するだけ</div>
+          <div class="workflow-sublabel">チャットパネル</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-icon wf2">🖼</div>
+          <div class="workflow-name">②キャンバス生成</div>
+          <div class="workflow-desc">右側に即座にデザインが表示される</div>
+          <div class="workflow-sublabel">リアルタイム反映</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-icon wf3">✏️</div>
+          <div class="workflow-name">③対話で編集</div>
+          <div class="workflow-desc">チャット or インラインコメントで細部を修正</div>
+          <div class="workflow-sublabel">Tweak/Editモード</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-icon wf4">📤</div>
+          <div class="workflow-name">④エクスポート＆共有</div>
+          <div class="workflow-desc">PDF・PPTX・HTML・Canva など多形式で出力</div>
+          <div class="workflow-sublabel">共有リンク発行も可</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-icon wf5">⚙️</div>
+          <div class="workflow-name">⑤Claude Code へ引き継ぎ</div>
+          <div class="workflow-desc">コマンドをコピーして即実装フェーズへ移行</div>
+          <div class="workflow-sublabel">設計→実装が途切れない</div>
+        </div>
+      </div>
+
+      <!-- 主要3機能 -->
+      <div class="cd-features">
+        <div class="cd-feature">
+          <div class="cd-feature-icon">🎨</div>
+          <h4>デザインシステム自動継承</h4>
+          <p>ブランドの色・フォント・コンポーネントを読み込ませるだけで自動適用。毎回バラバラになる問題を解決。</p>
+          <ul>
+            <li>スクリーンショット・画像をアップロード</li>
+            <li>Figmaファイルやコードリポジトリを参照</li>
+            <li>DOCX / PPTX / XLSX もインポート可</li>
+          </ul>
+        </div>
+        <div class="cd-feature">
+          <div class="cd-feature-icon">💬</div>
+          <h4>チャット ＋ インライン編集</h4>
+          <p>大きな変更はチャットで、細かな調整はキャンバス上のインラインコメントで。バージョン管理も内蔵。</p>
+          <ul>
+            <li>「ヘッダーのレイアウト変更して」→ チャット</li>
+            <li>「このボタンのパディングを大きく」→ インライン</li>
+            <li>現在の状態を保存して別アプローチも試せる</li>
+          </ul>
+        </div>
+        <div class="cd-feature">
+          <div class="cd-feature-icon">📤</div>
+          <h4>多彩なエクスポート ＆ 引き継ぎ</h4>
+          <p>実務で使える形式に変換。Canva連携でさらに磨き、Claude Codeへ渡して実装まで完結。</p>
+          <div class="export-diagram">
+            <div class="export-chip"><span>📄</span> PDF</div>
+            <div class="export-chip"><span>📊</span> PPTX</div>
+            <div class="export-chip"><span>🌐</span> HTML</div>
+            <div class="export-chip"><span>📦</span> ZIP</div>
+            <div class="export-chip"><span>🎨</span> Canva</div>
+            <div class="export-chip"><span>⚙️</span> Claude Code</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- こんな人に向いている -->
+      <div class="cd-roles">
+        <div class="cd-role">
+          <div class="cd-role-icon">👨‍💻</div>
+          <h5>エンジニア</h5>
+          <p>UIデザインの壁を対話で突破。Claude Codeへ直接引き継ぎ</p>
+        </div>
+        <div class="cd-role">
+          <div class="cd-role-icon">📋</div>
+          <h5>PM / プランナー</h5>
+          <p>ワイヤーフレームで要件を視覚化。チームへの共有が即座に</p>
+        </div>
+        <div class="cd-role">
+          <div class="cd-role-icon">🚀</div>
+          <h5>個人開発者</h5>
+          <p>企画からLP公開まで一人で完結。プロトタイプの速度が段違い</p>
+        </div>
+        <div class="cd-role">
+          <div class="cd-role-icon">🎯</div>
+          <h5>マーケター</h5>
+          <p>LPやキャンペーン素材を即生成。A/Bテスト用バリエーションも楽</p>
+        </div>
+      </div>
+
+      <!-- 学習フェーズとの対応 -->
+      <div class="cd-phase-integration">
+        <h4>この学習ロードマップでの Claude Design 活用イメージ</h4>
+        <div class="cd-phase-rows">
+          <div class="cd-phase-row">
+            <span class="cd-phase-tag" style="background:var(--phase1-light);color:var(--phase1);">Phase 1</span>
+            <span>Material Design などの既存DSをClaude Designに読み込み、どう解釈するか見て学ぶ。基礎の理解が直感的になる</span>
+          </div>
+          <div class="cd-phase-row">
+            <span class="cd-phase-tag" style="background:var(--phase2-light);color:var(--phase2);">Phase 2</span>
+            <span>Atomic Designを学びながら、実際にClaude Designでコンポーネントを試作。設計思想と出力結果を比較する</span>
+          </div>
+          <div class="cd-phase-row">
+            <span class="cd-phase-tag" style="background:var(--phase3-light);color:var(--phase3);">Phase 3</span>
+            <span>エクスポート機能（HTML / PPTX）を使い、Storybookと比較。ツールの使い分けを体感しながらトークン設計を深める</span>
+          </div>
+          <div class="cd-phase-row">
+            <span class="cd-phase-tag" style="background:var(--phase4-light);color:var(--phase4);">Phase 4</span>
+            <span>このポートフォリオにClaude Designで作ったモックアップを適用 → Claude Code に引き継いで実装。ワークフロー全体を体験する</span>
+          </div>
+        </div>
+        <div class="cd-limits">
+          <h5>⚠️ 現時点の制限（研究プレビュー段階）</h5>
+          <ul>
+            <li>インラインコメントが消失する場合がある</li>
+            <li>大規模なコードベース読み込み時にラグが生じることがある</li>
+            <li>細かなレイアウト調整はFigmaには及ばない（プロトタイプ初期段階として活用するのが現実的）</li>
+          </ul>
         </div>
       </div>
     </div>
