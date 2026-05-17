@@ -646,6 +646,113 @@
     }
     .tip-text { font-size: 0.875rem; line-height: 1.6; padding-top: 4px; }
 
+    /* ── DAY 1 START ── */
+    .day1-section {
+      background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+      border-radius: 12px;
+      padding: 36px 40px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .day1-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), #E8C87A, var(--primary));
+    }
+    .day1-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .day1-badge {
+      background: var(--primary);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .day1-header h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #fff;
+      margin: 0;
+    }
+    .day1-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .day1-step {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .day1-step-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .day1-step h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .day1-step p {
+      font-size: 0.8rem;
+      color: #B0B0B0;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .day1-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid rgba(201,169,97,0.4);
+      padding: 5px 12px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .day1-link:hover { background: rgba(201,169,97,0.15); }
+    .day1-note {
+      background: rgba(201,169,97,0.1);
+      border: 1px solid rgba(201,169,97,0.25);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.82rem;
+      color: #C8C8C8;
+      line-height: 1.6;
+    }
+    .day1-note b { color: var(--primary); }
+    .resource-card a.resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid rgba(201,169,97,0.4);
+      padding: 5px 12px;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .resource-card a.resource-link:hover { background: var(--primary-light); }
+
     /* ── CLAUDE DESIGN ── */
     .cd-section {
       background: var(--card);
@@ -911,6 +1018,79 @@
   </div>
 
   <main>
+
+    <!-- DAY 1 START -->
+    <div class="day1-section">
+      <div class="day1-header">
+        <div class="day1-badge">TODAY — DAY 1</div>
+        <h2>まず今日30分でやること — ここから動き出す</h2>
+      </div>
+      <div class="day1-steps">
+        <div class="day1-step">
+          <div class="day1-step-num">STEP 01 &nbsp;▸ 10分</div>
+          <h4>色の仕組みを眺める</h4>
+          <p>Material Design 3 のカラーシステムページを開く。難しく読まなくていい。「色がどう整理されているか」だけ感じ取る。</p>
+          <a class="day1-link" href="https://m3.material.io/styles/color/system/overview" target="_blank" rel="noopener">→ 開く</a>
+        </div>
+        <div class="day1-step">
+          <div class="day1-step-num">STEP 02 &nbsp;▸ 10分</div>
+          <h4>手元のHTMLと並べる</h4>
+          <p>ダウンロードした index.html をテキストエディタで開き <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;">:root</code> ブロックを探す。Material Design と自分のファイルを比べてみる。</p>
+          <a class="day1-link" href="https://code.visualstudio.com/" target="_blank" rel="noopener">→ VSCode（無料）</a>
+        </div>
+        <div class="day1-step">
+          <div class="day1-step-num">STEP 03 &nbsp;▸ 10分</div>
+          <h4>Claude Design で試打ち</h4>
+          <p>Claude のサイドメニューから Claude Design を開き、下のフレーズをそのままコピペして送る。出てきたものを眺めるだけでOK。</p>
+          <a class="day1-link" href="https://claude.ai" target="_blank" rel="noopener">→ Claude を開く</a>
+        </div>
+      </div>
+      <div class="day1-note">
+        <b>STEP 03 コピペ用フレーズ：</b>　「シンプルなボタンコンポーネントを3バリアントで作って。Primary（塗り）/ Secondary（ボーダー）/ Ghost（テキストのみ）。カラーは #C9A961 をプライマリに。default と hover の2状態を並べて表示して。」
+      </div>
+    </div>
+
+    <!-- WEEK BY WEEK PLAN -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px 36px;margin-bottom:48px;">
+      <h2 style="font-size:1.1rem;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
+        <span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:6px;font-size:0.78rem;font-weight:700;">WEEK BY WEEK</span>
+        週ごとの具体的な学習アクション
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="display:grid;grid-template-columns:90px 1fr;border-bottom:1px solid var(--border);padding:14px 0;">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--phase1);padding-top:2px;">Week 1</div>
+          <div style="font-size:0.85rem;line-height:1.7;">
+            <b>① Material Design 3 のColorページを読む</b>（約30分）→ <a href="https://m3.material.io/styles/color/system/overview" target="_blank" rel="noopener" style="color:var(--primary);">m3.material.io</a><br>
+            <b>② タイポグラフィページも読む</b> → <a href="https://m3.material.io/styles/typography/overview" target="_blank" rel="noopener" style="color:var(--primary);">m3.material.io/typography</a><br>
+            <b>③ index.html の :root 変数をMaterial Design の値に合わせて書き換えてみる</b>（手を動かす）
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr;border-bottom:1px solid var(--border);padding:14px 0;">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--phase1);padding-top:2px;">Week 2</div>
+          <div style="font-size:0.85rem;line-height:1.7;">
+            <b>① Atomic Design の Chapter 1〜2 を読む</b> → <a href="https://atomicdesign.bradfrost.com/chapter-1/" target="_blank" rel="noopener" style="color:var(--primary);">atomicdesign.bradfrost.com</a>（無料・英語）<br>
+            <b>② Figma Community で実際のDSファイルを開いて構造を眺める</b> → <a href="https://www.figma.com/community/tag/design+system" target="_blank" rel="noopener" style="color:var(--primary);">figma.com/community</a><br>
+            <b>③ Claude Design で「Buttonコンポーネントを3バリアント＋3状態で作って」と指示してみる</b>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr;border-bottom:1px solid var(--border);padding:14px 0;">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--phase2);padding-top:2px;">Week 3</div>
+          <div style="font-size:0.85rem;line-height:1.7;">
+            <b>① Ant Design のコンポーネント一覧を眺め、設計思想を読む</b> → <a href="https://ant.design/components/overview/" target="_blank" rel="noopener" style="color:var(--primary);">ant.design</a><br>
+            <b>② Kevin Powell の CSS Custom Properties 動画（15〜20分）を1本観る</b> → <a href="https://www.youtube.com/@KevinPowell" target="_blank" rel="noopener" style="color:var(--primary);">YouTube @KevinPowell</a><br>
+            <b>③ index.html に自作のコンポーネント（カード・ボタン）を追加してみる</b>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr;padding:14px 0;">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--phase2);padding-top:2px;">Week 4〜</div>
+          <div style="font-size:0.85rem;line-height:1.7;">
+            <b>① Storybook のチュートリアルに着手</b> → <a href="https://storybook.js.org/tutorials/" target="_blank" rel="noopener" style="color:var(--primary);">storybook.js.org/tutorials</a><br>
+            <b>② Claude Design で自分のポートフォリオのLPを作り直し、Claude Code に引き継ぐ</b><br>
+            <b>③ 上記をくり返し、作ったものをGitHubに上げて公開する</b>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- WHAT IS DESIGN SYSTEM -->
     <div class="what-is">
@@ -1394,62 +1574,68 @@
       <div class="resource-card">
         <div class="resource-icon">📗</div>
         <h4>Material Design 3</h4>
-        <p>Google製の最高のデザインシステム。トークン・コンポーネント全て無料で参照可能。</p>
+        <p>Google製の最高のデザインシステム。トークン・コンポーネント全て無料で参照可能。Color → Typography → Spacing の順に読む。</p>
         <div class="resource-tags">
           <span class="resource-tag">Phase 1</span>
           <span class="resource-tag">無料</span>
           <span class="resource-tag">リファレンス</span>
         </div>
+        <a class="resource-link" href="https://m3.material.io/" target="_blank" rel="noopener">→ m3.material.io を開く</a>
       </div>
       <div class="resource-card">
         <div class="resource-icon">🎓</div>
         <h4>Figma Community</h4>
-        <p>既存DSのFigmaファイルを開いて構造を学べる。Design Tokensの実例多数あり。</p>
+        <p>既存DSのFigmaファイルを開いて構造を学べる。「design system」で検索するとMaterial・Atlassian等のDSが入手できる。</p>
         <div class="resource-tags">
           <span class="resource-tag">Phase 2</span>
           <span class="resource-tag">無料</span>
           <span class="resource-tag">実例</span>
         </div>
+        <a class="resource-link" href="https://www.figma.com/community/tag/design+system" target="_blank" rel="noopener">→ Figma Community を開く</a>
       </div>
       <div class="resource-card">
         <div class="resource-icon">📦</div>
-        <h4>Storybook 公式ドキュメント</h4>
-        <p>コンポーネントカタログの作り方。チュートリアルが日本語対応されている。</p>
+        <h4>Storybook チュートリアル</h4>
+        <p>コンポーネントカタログの作り方。React / Vue / HTML など環境別のチュートリアルが揃っている。</p>
         <div class="resource-tags">
           <span class="resource-tag">Phase 3</span>
           <span class="resource-tag">無料</span>
           <span class="resource-tag">ツール</span>
         </div>
+        <a class="resource-link" href="https://storybook.js.org/tutorials/" target="_blank" rel="noopener">→ storybook.js.org を開く</a>
       </div>
       <div class="resource-card">
         <div class="resource-icon">🎨</div>
         <h4>Ant Design</h4>
-        <p>コンポーネントの設計思想がドキュメントに詳しく書かれている。実装の参考に最適。</p>
+        <p>コンポーネントの設計思想がドキュメントに詳しく書かれている。コードも読めるので実装の参考に最適。</p>
         <div class="resource-tags">
           <span class="resource-tag">Phase 2〜3</span>
           <span class="resource-tag">無料</span>
           <span class="resource-tag">OSSコード</span>
         </div>
+        <a class="resource-link" href="https://ant.design/components/overview/" target="_blank" rel="noopener">→ ant.design を開く</a>
       </div>
       <div class="resource-card">
         <div class="resource-icon">📺</div>
         <h4>Kevin Powell (YouTube)</h4>
-        <p>CSSとデザインシステムの実装を英語で解説。実践的なCSS Custom Propertiesの使い方。</p>
+        <p>CSSとデザインシステムの実装を英語で解説。CSS Custom Properties の動画から観始めるのがおすすめ。</p>
         <div class="resource-tags">
           <span class="resource-tag">Phase 1〜3</span>
           <span class="resource-tag">無料</span>
           <span class="resource-tag">動画</span>
         </div>
+        <a class="resource-link" href="https://www.youtube.com/@KevinPowell" target="_blank" rel="noopener">→ YouTube を開く</a>
       </div>
       <div class="resource-card">
         <div class="resource-icon">📖</div>
-        <h4>Atomic Design (書籍)</h4>
-        <p>Brad Frost著。Atomic Designの原典。無料でWeb版あり。Phase 2の前に読むべき。</p>
+        <h4>Atomic Design (Web無料版)</h4>
+        <p>Brad Frost著。Atomic Designの原典。Chapter 1〜2 だけでもPhase 2 の理解が格段に上がる。</p>
         <div class="resource-tags">
           <span class="resource-tag">Phase 2</span>
           <span class="resource-tag">無料Web版</span>
           <span class="resource-tag">書籍</span>
         </div>
+        <a class="resource-link" href="https://atomicdesign.bradfrost.com/table-of-contents/" target="_blank" rel="noopener">→ 無料Web版を開く</a>
       </div>
     </div>
 
