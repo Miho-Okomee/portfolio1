@@ -544,6 +544,69 @@
       color: var(--muted);
     }
 
+    /* ── VOCAB SECTION ── */
+    .vocab-section {
+      margin-bottom: 48px;
+    }
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .vocab-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .vocab-card-header {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .vocab-card-icon { font-size: 1.1rem; }
+    .vocab-card-title { font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .vocab-card-sub  { font-size: 0.72rem; opacity: 0.8; margin-top: 1px; }
+    .vocab-card-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .vocab-phrase {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .vocab-phrase-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-family: 'Courier New', 'Hiragino Kaku Gothic ProN', monospace;
+      line-height: 1.5;
+    }
+    .vocab-phrase-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .vocab-phrase-note b { color: var(--text); }
+    .vocab-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .tag-chat     { background: #EBF4FF; color: #4A90D9; }
+    .tag-inline   { background: #E8F8F0; color: #52B788; }
+    .tag-setup    { background: #F0EEFF; color: #7B68EE; }
+    .tag-export   { background: #FFF3EA; color: #E07B39; }
+    .vocab-divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 2px 0;
+    }
+
     /* ── TIPS ── */
     .tips {
       background: linear-gradient(135deg, var(--primary-light) 0%, #FFF8EE 100%);
@@ -807,6 +870,7 @@
       .cd-roles { grid-template-columns: 1fr 1fr; }
       .cd-compare { grid-template-columns: 1fr; }
       .compare-arrow-box { transform: rotate(90deg); height: 32px; }
+      .vocab-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1388,6 +1452,277 @@
         </div>
       </div>
     </div>
+
+    <!-- VOCAB SECTION -->
+    <div class="vocab-section">
+      <div class="section-title">
+        <h2>Claude Design 会話フレーズ集</h2>
+        <p>精度・確度を上げるために、セクション別に使い分ける</p>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--muted);">
+          <span class="vocab-tag tag-chat">チャット</span>大きな変更・構造変更向き
+        </span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--muted);">
+          <span class="vocab-tag tag-inline">インライン</span>細部の局所修正向き
+        </span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--muted);">
+          <span class="vocab-tag tag-setup">DS設定</span>デザインシステム構築時
+        </span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--muted);">
+          <span class="vocab-tag tag-export">出力</span>エクスポート・引き継ぎ
+        </span>
+      </div>
+
+      <div class="vocab-grid">
+
+        <!-- 1. モード・全体方針 -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#4A90D9;">
+            <span class="vocab-card-icon">🎛</span>
+            <div>
+              <div class="vocab-card-title">① モード・全体方針の指定</div>
+              <div class="vocab-card-sub">最初にモードを宣言すると精度が上がる</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「プロトタイプモードで、UIのワイヤーフレームを作って」</div>
+              <div class="vocab-phrase-note">グレースケールの構造図として生成される。最初に形を決めてから色をつける流れが精度◎</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「スライドモードで、5枚構成のピッチデッキを作って。構成：課題 / 解決策 / 市場 / チーム / 次のステップ」</div>
+              <div class="vocab-phrase-note"><b>スライド枚数と構成</b>を最初に渡すと骨格がぶれない</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「現在の状態を保存して、別アプローチで2バリアント作って」</div>
+              <div class="vocab-phrase-note">バージョン管理機能を活用。比較しながら方向性を決める使い方が精度を上げる近道</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. スタイル・トーン指定 -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#7B68EE;">
+            <span class="vocab-card-icon">🎨</span>
+            <div>
+              <div class="vocab-card-title">② スタイル・トーンの語彙</div>
+              <div class="vocab-card-sub">「なんとなく良い感じ」を具体的な言葉に変換する</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text">ミニマル・洗練</div>
+              <div class="vocab-phrase-note">「余白を広めに、テキストは細めのウェイト（font-weight: 300）、装飾は最小限で」</div>
+            </div>
+            <hr class="vocab-divider">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text">コーポレート・信頼感</div>
+              <div class="vocab-phrase-note">「ネイビー・ホワイト基調、直線的なレイアウト、余白は控えめ、グリッドを厳格に守って」</div>
+            </div>
+            <hr class="vocab-divider">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text">カジュアル・フレンドリー</div>
+              <div class="vocab-phrase-note">「丸みのあるコーナー（border-radius: 12px〜）、暖色系アクセント、アイコンを多用して」</div>
+            </div>
+            <hr class="vocab-divider">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text">高級感・プレミアム</div>
+              <div class="vocab-phrase-note">「ダークバックグラウンド、ゴールドのアクセント、セリフ体の見出し、余白を最大限広く」</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. レイアウト・構造指示 -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#52B788;">
+            <span class="vocab-card-icon">📐</span>
+            <div>
+              <div class="vocab-card-title">③ レイアウト・構造の指示</div>
+              <div class="vocab-card-sub">セクション名と配置を明示すると解釈ズレが減る</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「ページ構成：ヒーロー → 特徴3列 → お客様の声 → CTA → フッター」</div>
+              <div class="vocab-phrase-note">セクション順を最初に宣言するだけで大幅にズレが減る。最重要テクニック</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「CTAボタンをfold（スクロールなしで見える範囲）内に配置して」</div>
+              <div class="vocab-phrase-note"><b>fold</b> はWebデザイン用語。ファーストビューにCTAを置く指示として通じる</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「ヒーローセクションを左テキスト・右画像の2カラム、画像は aspect-ratio: 4/3 で」</div>
+              <div class="vocab-phrase-note">比率まで指定すると画像プレースホルダーの形がぶれない</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-inline">インライン</span>「このセクション全体の上下パディングを120pxにして」</div>
+              <div class="vocab-phrase-note">px値を明示すると、曖昧な「余白を増やして」より確実に意図が伝わる</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. タイポグラフィ・色の指定 -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#E07B39;">
+            <span class="vocab-card-icon">🖋</span>
+            <div>
+              <div class="vocab-card-title">④ タイポグラフィ・色の指定</div>
+              <div class="vocab-card-sub">数値で渡すと解釈ズレがゼロになる</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-setup">DS設定</span>「タイポグラフィスケール：H1=48px/300、H2=32px/400、本文=16px/400、キャプション=13px/400」</div>
+              <div class="vocab-phrase-note">サイズと font-weight をセットで渡すのが◎。デザインシステム設定時に一度決めてしまう</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-setup">DS設定</span>「カラーパレット：プライマリ #C9A961、テキスト #2C2C2C、背景 #FAFAF8、グレー #6B6B6B」</div>
+              <div class="vocab-phrase-note">HEXコードで渡せば色のブレが完全になくなる。このポートフォリオのCSSから転用してみよう</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-inline">インライン</span>「このCTAボタンの背景を #C9A961、テキストを #FFFFFF、hover時は透明背景＋ #C9A961 のborderで」</div>
+              <div class="vocab-phrase-note">ホバー状態まで指定すると実装前提のデザインとして整合性が上がる</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. コンポーネント指示 -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#DA7756;">
+            <span class="vocab-card-icon">🧩</span>
+            <div>
+              <div class="vocab-card-title">⑤ コンポーネント・状態の指示</div>
+              <div class="vocab-card-sub">状態（state）を明示すると実装者への伝達精度が上がる</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「Buttonコンポーネントを3バリアントで：Primary（塗り）/ Secondary（ボーダーのみ）/ Ghost（テキストのみ）」</div>
+              <div class="vocab-phrase-note">Atomic Design の Atoms レベルで語彙を合わせておくと、Phase 2以降の学習と接続しやすい</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-inline">インライン</span>「このFormFieldの状態を4つ並べて：default / focus / error / disabled」</div>
+              <div class="vocab-phrase-note"><b>state（状態）</b>を見える化しておくと、Storybookへの移行（Phase 3）がそのままスムーズになる</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「モバイル（375px）とデスクトップ（1280px）の両ブレークポイントを並べて比較できるように表示して」</div>
+              <div class="vocab-phrase-note">レスポンシブ設計を確認する定番の指示。ブレークポイント値を明示するのがコツ</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. デザインシステム引き込み -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#7B68EE;">
+            <span class="vocab-card-icon">📥</span>
+            <div>
+              <div class="vocab-card-title">⑥ デザインシステム継承の指示</div>
+              <div class="vocab-card-sub">何を読み込ませるかで出力品質が大きく変わる</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-setup">DS設定</span>「このスクリーンショットからブランドカラーとフォントを抽出して、デザインシステムとして設定して」</div>
+              <div class="vocab-phrase-note">既存サイトのキャプチャを貼るだけでDS継承が始まる。最速のセットアップ方法</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-setup">DS設定</span>「index.html の CSS変数（:root ブロック）を参照して、同じデザイントークンを使って」</div>
+              <div class="vocab-phrase-note">このポートフォリオで実践できる。コードを貼り付けてトークンを共有する</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-setup">DS設定</span>「スペーシングルール：4の倍数（4/8/16/24/32/48/80px）で統一して」</div>
+              <div class="vocab-phrase-note">スペーシングシステムを最初に宣言しておくと、余白の指示がすべて一貫する</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. 反復・バージョン管理 -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#52B788;">
+            <span class="vocab-card-icon">🔄</span>
+            <div>
+              <div class="vocab-card-title">⑦ 反復・バージョン管理の指示</div>
+              <div class="vocab-card-sub">「保存 → 試す」のループが品質を上げる</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「今の状態を v1 として保存して。次にヒーローの背景を動画にした v2 も作って」</div>
+              <div class="vocab-phrase-note">バージョン名を付けると会話の中で「v1 に戻して」と参照できる</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「全体の方向性をミニマルからリッチ・プレミアムに変更して。トークンを引き継いだまま雰囲気だけ変えて」</div>
+              <div class="vocab-phrase-note"><b>「トークンを引き継いだまま」</b>という条件を付けることで、カラーを壊さずにスタイルだけ変えられる</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-chat">チャット</span>「ダークモードバージョンを作って。light/dark の2画面を並べて比較表示して」</div>
+              <div class="vocab-phrase-note">ダークモード対応はPhase 2の学習トピック。Claude Designで実験すると理解が早い</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. エクスポート・Claude Code引き継ぎ -->
+        <div class="vocab-card">
+          <div class="vocab-card-header" style="background:#2C2C2C;">
+            <span class="vocab-card-icon">⚙️</span>
+            <div>
+              <div class="vocab-card-title">⑧ エクスポート ＆ Claude Code 引き継ぎ</div>
+              <div class="vocab-card-sub">デザインを実装につなげるための指示</div>
+            </div>
+          </div>
+          <div class="vocab-card-body">
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-export">出力</span>「スタンドアロンHTMLでエクスポートして。CSSはインラインで埋め込んで」</div>
+              <div class="vocab-phrase-note">外部依存なしの1ファイルHTMLが出力される。そのままブラウザで確認 or Claude Codeに渡す</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-export">出力</span>「このデザインをClaude Codeに引き継ぐためのコマンドをコピーして」</div>
+              <div class="vocab-phrase-note">コマンドをClaude Codeに貼るだけで実装フェーズへ移行。デザイン→コードの手戻りがなくなる</div>
+            </div>
+            <div class="vocab-phrase">
+              <div class="vocab-phrase-text"><span class="vocab-tag tag-export">出力</span>「このデザインを実装するために必要なCSSカスタムプロパティ（変数）の一覧を出して」</div>
+              <div class="vocab-phrase-note">トークンリストを先に出力させておくと、Storybook（Phase 3）やCSSファイルへの転記がそのまま使える</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /vocab-grid -->
+
+      <!-- 精度を上げる組み合わせパターン -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-top:20px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#2C2C2C;color:#fff;padding:4px 12px;border-radius:6px;font-size:0.8rem;">BEST PRACTICE</span>
+          精度を最大化する「指示の組み合わせパターン」
+        </h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:var(--light);border-radius:8px;padding:16px;">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--muted);margin-bottom:10px;letter-spacing:0.05em;">LP制作の鉄板スターター</div>
+            <div style="font-size:0.82rem;line-height:1.8;font-family:'Courier New',monospace;color:var(--text);">
+              「LPを作って。<br>
+              &nbsp;<b>ターゲット：</b>30代ビジネスパーソン<br>
+              &nbsp;<b>構成：</b>ヒーロー→特徴3列→CTA<br>
+              &nbsp;<b>スタイル：</b>ミニマル、余白広め<br>
+              &nbsp;<b>カラー：</b>#C9A961 をプライマリに<br>
+              &nbsp;<b>fold内にCTAボタン</b>を配置して」
+            </div>
+          </div>
+          <div style="background:var(--light);border-radius:8px;padding:16px;">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--muted);margin-bottom:10px;letter-spacing:0.05em;">コンポーネント設計の鉄板スターター</div>
+            <div style="font-size:0.82rem;line-height:1.8;font-family:'Courier New',monospace;color:var(--text);">
+              「Buttonコンポーネントを設計して。<br>
+              &nbsp;<b>バリアント：</b>Primary / Secondary / Ghost<br>
+              &nbsp;<b>状態：</b>default / hover / disabled<br>
+              &nbsp;<b>サイズ：</b>sm / md / lg<br>
+              &nbsp;<b>カラートークン：</b>#C9A961<br>
+              &nbsp;3×3のグリッドで並べて比較表示して」
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /vocab-section -->
 
     <!-- TIPS -->
     <div class="tips">
