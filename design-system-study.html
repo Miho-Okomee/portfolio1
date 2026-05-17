@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デザインシステム 学習ガイド</title>
+  <style>
+    :root {
+      --primary: #C9A961;
+      --primary-light: #F0E4C8;
+      --primary-dark: #A08040;
+      --bg: #FAFAF8;
+      --card: #FFFFFF;
+      --text: #2C2C2C;
+      --muted: #6B6B6B;
+      --light: #F5F1EB;
+      --border: #E8E2D9;
+      --phase1: #4A90D9;
+      --phase2: #7B68EE;
+      --phase3: #52B788;
+      --phase4: #E07B39;
+      --phase1-light: #EBF4FF;
+      --phase2-light: #F0EEFF;
+      --phase3-light: #E8F8F0;
+      --phase4-light: #FFF3EA;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+      padding: 64px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(201,169,97,0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 30%, rgba(201,169,97,0.1) 0%, transparent 50%);
+    }
+    .header-content { position: relative; max-width: 800px; margin: 0 auto; }
+    .header-badge {
+      display: inline-block;
+      background: rgba(201,169,97,0.2);
+      color: var(--primary);
+      border: 1px solid rgba(201,169,97,0.4);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .header h1 span { color: var(--primary); }
+    .header p { color: #B0B0B0; font-size: 1.1rem; }
+
+    /* ── SUMMARY CARD ── */
+    .summary-bar {
+      background: var(--primary);
+      padding: 24px;
+      text-align: center;
+    }
+    .summary-bar-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .summary-stat { color: #FFFFFF; }
+    .summary-stat .number {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+      line-height: 1;
+    }
+    .summary-stat .label {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+    .summary-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 1000px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-title h2 {
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .section-title p { color: var(--muted); }
+
+    /* ── WHAT IS DS ── */
+    .what-is {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 48px;
+      border: 1px solid var(--border);
+    }
+    .what-is h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .what-is h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--primary);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── DS PYRAMID DIAGRAM ── */
+    .pyramid-diagram {
+      margin: 32px auto;
+      max-width: 560px;
+    }
+    .pyramid-level {
+      display: flex;
+      align-items: stretch;
+      margin-bottom: 4px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .pyramid-label {
+      background: #2C2C2C;
+      color: #FFF;
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      min-width: 130px;
+    }
+    .pyramid-content {
+      flex: 1;
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pyramid-tag {
+      background: rgba(0,0,0,0.08);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+    }
+    .level-design   { background: var(--phase1-light); }
+    .level-tokens   { background: var(--phase2-light); }
+    .level-comp     { background: var(--phase3-light); }
+    .level-patterns { background: var(--phase4-light); }
+
+    .ds-definition {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .ds-def-card {
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--light);
+      border-left: 3px solid var(--primary);
+    }
+    .ds-def-card h4 { font-size: 0.95rem; margin-bottom: 6px; }
+    .ds-def-card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      margin-bottom: 48px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 140px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--phase1), var(--phase2), var(--phase3), var(--phase4));
+    }
+    .phase {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .phase-time {
+      width: 120px;
+      flex-shrink: 0;
+      text-align: right;
+      padding-top: 20px;
+    }
+    .phase-time .week {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .phase-time .hours {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .phase-dot {
+      width: 40px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+    }
+    .phase-dot .dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 3px solid #FFF;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 3px currentColor;
+    }
+    .phase-1 .dot { color: var(--phase1); background: var(--phase1); }
+    .phase-2 .dot { color: var(--phase2); background: var(--phase2); }
+    .phase-3 .dot { color: var(--phase3); background: var(--phase3); }
+    .phase-4 .dot { color: var(--phase4); background: var(--phase4); }
+    .phase-1 .phase-time .week { color: var(--phase1); }
+    .phase-2 .phase-time .week { color: var(--phase2); }
+    .phase-3 .phase-time .week { color: var(--phase3); }
+    .phase-4 .phase-time .week { color: var(--phase4); }
+
+    .phase-card {
+      flex: 1;
+      border-radius: 12px;
+      padding: 24px 28px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+    .phase-1 .phase-card { border-top: 3px solid var(--phase1); }
+    .phase-2 .phase-card { border-top: 3px solid var(--phase2); }
+    .phase-3 .phase-card { border-top: 3px solid var(--phase3); }
+    .phase-4 .phase-card { border-top: 3px solid var(--phase4); }
+
+    .phase-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+    .phase-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 4px;
+    }
+    .phase-title { font-size: 1.2rem; font-weight: 600; }
+    .phase-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .phase-1 .phase-badge { background: var(--phase1-light); color: var(--phase1); }
+    .phase-2 .phase-badge { background: var(--phase2-light); color: var(--phase2); }
+    .phase-3 .phase-badge { background: var(--phase3-light); color: var(--phase3); }
+    .phase-4 .phase-badge { background: var(--phase4-light); color: var(--phase4); }
+
+    .phase-topics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .topic-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+    .topic-item::before {
+      content: '▸';
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 0.75rem;
+    }
+    .phase-1 .topic-item::before { color: var(--phase1); }
+    .phase-2 .topic-item::before { color: var(--phase2); }
+    .phase-3 .topic-item::before { color: var(--phase3); }
+    .phase-4 .topic-item::before { color: var(--phase4); }
+
+    .phase-output {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .phase-1 .phase-output { background: var(--phase1-light); color: var(--phase1); }
+    .phase-2 .phase-output { background: var(--phase2-light); color: var(--phase2); }
+    .phase-3 .phase-output { background: var(--phase3-light); color: var(--phase3); }
+    .phase-4 .phase-output { background: var(--phase4-light); color: var(--phase4); }
+    .output-icon { font-size: 1rem; }
+
+    /* ── VISUAL DIAGRAMS ── */
+    .diagram-section {
+      margin-bottom: 48px;
+    }
+
+    /* Atomic Design Diagram */
+    .atomic-diagram {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .atomic-diagram h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .atomic-levels {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .atomic-level {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      position: relative;
+    }
+    .atomic-level:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 1.2rem;
+      z-index: 1;
+    }
+    .atomic-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .a1 { background: #EBF4FF; }
+    .a2 { background: #F0EEFF; }
+    .a3 { background: #E8F8F0; }
+    .a4 { background: #FFF3EA; }
+    .a5 { background: #FEF3F3; }
+    .atomic-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+    .atomic-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+
+    /* Token Diagram */
+    .token-diagram {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .token-diagram h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .token-group { text-align: center; }
+    .token-group-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .token-swatch {
+      height: 40px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+    .token-type-box {
+      height: 40px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F5F1EB;
+    }
+    .token-label { font-size: 0.75rem; color: var(--muted); }
+    .token-space-boxes { display: flex; gap: 3px; margin-bottom: 6px; }
+    .space-box { border-radius: 4px; background: var(--primary-light); height: 40px; }
+
+    /* ── RESOURCES ── */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .resource-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      transition: box-shadow 0.2s;
+    }
+    .resource-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .resource-icon {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    .resource-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+    .resource-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+    .resource-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .resource-tag {
+      font-size: 0.72rem;
+      padding: 3px 9px;
+      border-radius: 10px;
+      background: var(--light);
+      color: var(--muted);
+    }
+
+    /* ── SUMMARY TIMELINE ── */
+    .summary-timeline {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+    .summary-timeline h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .gantt {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .gantt-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .gantt-label {
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: right;
+    }
+    .gantt-bar-wrap {
+      flex: 1;
+      background: var(--light);
+      border-radius: 6px;
+      height: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gantt-bar {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #FFF;
+      white-space: nowrap;
+      position: absolute;
+    }
+    .gantt-weeks {
+      display: flex;
+      gap: 12px;
+      margin-left: 132px;
+      margin-bottom: 4px;
+    }
+    .gantt-week-label {
+      flex: 1;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── TIPS ── */
+    .tips {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #FFF8EE 100%);
+      border: 1px solid rgba(201,169,97,0.3);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .tips h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--primary-dark);
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .tip-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .tip-num {
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: #FFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tip-text { font-size: 0.875rem; line-height: 1.6; padding-top: 4px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .timeline::before { left: 0; }
+      .phase { flex-direction: column; gap: 12px; }
+      .phase-time { width: auto; text-align: left; padding-top: 0; display: flex; align-items: center; gap: 12px; }
+      .phase-dot { display: none; }
+      .phase-topics { grid-template-columns: 1fr; }
+      .ds-definition { grid-template-columns: 1fr; }
+      .token-grid { grid-template-columns: 1fr 1fr; }
+      .atomic-levels { gap: 0; }
+      .tips-grid { grid-template-columns: 1fr; }
+      .summary-bar-inner { gap: 20px; }
+      .summary-divider { width: 40px; height: 1px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-badge">Study Guide</div>
+      <h1><span>デザインシステム</span>完全学習ガイド</h1>
+      <p>1日2時間で身につける、体系的な学習ロードマップ</p>
+    </div>
+  </header>
+
+  <!-- SUMMARY BAR -->
+  <div class="summary-bar">
+    <div class="summary-bar-inner">
+      <div class="summary-stat">
+        <span class="number">7週間</span>
+        <span class="label">総学習期間</span>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-stat">
+        <span class="number">98時間</span>
+        <span class="label">総学習時間</span>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-stat">
+        <span class="number">2時間/日</span>
+        <span class="label">1日の学習量</span>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-stat">
+        <span class="number">4フェーズ</span>
+        <span class="label">学習ステップ</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- WHAT IS DESIGN SYSTEM -->
+    <div class="what-is">
+      <h2>デザインシステムとは？</h2>
+
+      <div class="pyramid-diagram">
+        <div class="pyramid-level">
+          <div class="pyramid-label">🎯 デザイン原則</div>
+          <div class="pyramid-content level-design">
+            <span class="pyramid-tag">ブランド価値</span>
+            <span class="pyramid-tag">デザイン哲学</span>
+            <span class="pyramid-tag">ガイドライン</span>
+          </div>
+        </div>
+        <div class="pyramid-level">
+          <div class="pyramid-label">🪙 デザイントークン</div>
+          <div class="pyramid-content level-tokens">
+            <span class="pyramid-tag">Color</span>
+            <span class="pyramid-tag">Typography</span>
+            <span class="pyramid-tag">Spacing</span>
+            <span class="pyramid-tag">Shadow</span>
+          </div>
+        </div>
+        <div class="pyramid-level">
+          <div class="pyramid-label">🧩 コンポーネント</div>
+          <div class="pyramid-content level-comp">
+            <span class="pyramid-tag">Button</span>
+            <span class="pyramid-tag">Input</span>
+            <span class="pyramid-tag">Card</span>
+            <span class="pyramid-tag">Modal</span>
+          </div>
+        </div>
+        <div class="pyramid-level">
+          <div class="pyramid-label">📐 パターン</div>
+          <div class="pyramid-content level-patterns">
+            <span class="pyramid-tag">Navigation</span>
+            <span class="pyramid-tag">Form Layout</span>
+            <span class="pyramid-tag">Data Display</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-definition">
+        <div class="ds-def-card">
+          <h4>なぜ必要？</h4>
+          <p>チーム全体でUIを統一し、開発速度を上げるための「共通言語」。一度作れば再利用できる。</p>
+        </div>
+        <div class="ds-def-card">
+          <h4>有名な例</h4>
+          <p>Material Design (Google)、Ant Design、Tailwind、Apple HIG などが代表的。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GANTT CHART -->
+    <div class="summary-timeline">
+      <h3>7週間のスケジュール概観</h3>
+      <div class="gantt-weeks">
+        <div class="gantt-week-label">Week 1</div>
+        <div class="gantt-week-label">Week 2</div>
+        <div class="gantt-week-label">Week 3</div>
+        <div class="gantt-week-label">Week 4</div>
+        <div class="gantt-week-label">Week 5</div>
+        <div class="gantt-week-label">Week 6</div>
+        <div class="gantt-week-label">Week 7</div>
+      </div>
+      <div class="gantt">
+        <div class="gantt-row">
+          <div class="gantt-label">Phase 1<br>基礎</div>
+          <div class="gantt-bar-wrap">
+            <div class="gantt-bar" style="left:0%; width:28.5%; background:var(--phase1);">色・文字・余白</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="gantt-label">Phase 2<br>設計</div>
+          <div class="gantt-bar-wrap">
+            <div class="gantt-bar" style="left:28.5%; width:28.5%; background:var(--phase2);">Atomic・コンポーネント</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="gantt-label">Phase 3<br>ツール</div>
+          <div class="gantt-bar-wrap">
+            <div class="gantt-bar" style="left:57%; width:28.5%; background:var(--phase3);">Figma・Storybook</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="gantt-label">Phase 4<br>実践</div>
+          <div class="gantt-bar-wrap">
+            <div class="gantt-bar" style="left:71.4%; width:28.5%; background:var(--phase4);">自分のDSを作る</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE TIMELINE -->
+    <div class="section-title">
+      <h2>学習フェーズ詳細</h2>
+      <p>各フェーズの学習内容と目標を確認しましょう</p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- Phase 1 -->
+      <div class="phase phase-1">
+        <div class="phase-time">
+          <span class="week">Week 1〜2</span>
+          <span class="hours">28時間</span>
+        </div>
+        <div class="phase-dot"><div class="dot"></div></div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div>
+              <div class="phase-num">Phase 01</div>
+              <div class="phase-title">デザインの基礎</div>
+            </div>
+            <div class="phase-badge">入門</div>
+          </div>
+          <div class="phase-topics">
+            <div class="topic-item">カラー理論（色相・彩度・明度）</div>
+            <div class="topic-item">タイポグラフィの基礎</div>
+            <div class="topic-item">スペーシング・グリッドシステム</div>
+            <div class="topic-item">視覚的階層（ヒエラルキー）</div>
+            <div class="topic-item">コントラスト比とアクセシビリティ</div>
+            <div class="topic-item">既存DSの分析（Material等）</div>
+          </div>
+          <div class="phase-output">
+            <span class="output-icon">📄</span>
+            <span>成果物：カラーパレット＋タイポグラフィスケールのドキュメント</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase phase-2">
+        <div class="phase-time">
+          <span class="week">Week 3〜4</span>
+          <span class="hours">28時間</span>
+        </div>
+        <div class="phase-dot"><div class="dot"></div></div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div>
+              <div class="phase-num">Phase 02</div>
+              <div class="phase-title">コンポーネント設計</div>
+            </div>
+            <div class="phase-badge">基礎〜中級</div>
+          </div>
+          <div class="phase-topics">
+            <div class="topic-item">Atomic Design手法</div>
+            <div class="topic-item">コンポーネントの状態設計</div>
+            <div class="topic-item">バリアント・プロップスの設計</div>
+            <div class="topic-item">インタラクション・アニメーション</div>
+            <div class="topic-item">レスポンシブパターン</div>
+            <div class="topic-item">ダークモード対応</div>
+          </div>
+          <div class="phase-output">
+            <span class="output-icon">🧩</span>
+            <span>成果物：Button・Input・Card などの基本コンポーネントセット</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase phase-3">
+        <div class="phase-time">
+          <span class="week">Week 5〜6</span>
+          <span class="hours">28時間</span>
+        </div>
+        <div class="phase-dot"><div class="dot"></div></div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div>
+              <div class="phase-num">Phase 03</div>
+              <div class="phase-title">ツールと実装</div>
+            </div>
+            <div class="phase-badge">中級</div>
+          </div>
+          <div class="phase-topics">
+            <div class="topic-item">Figma Variables（トークン管理）</div>
+            <div class="topic-item">Storybook でのカタログ化</div>
+            <div class="topic-item">CSS Custom Properties</div>
+            <div class="topic-item">デザイントークン JSON</div>
+            <div class="topic-item">Git による バージョン管理</div>
+            <div class="topic-item">ドキュメント（Notion等）</div>
+          </div>
+          <div class="phase-output">
+            <span class="output-icon">🛠</span>
+            <span>成果物：Storybook で動くコンポーネントライブラリ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase phase-4">
+        <div class="phase-time">
+          <span class="week">Week 7</span>
+          <span class="hours">14時間</span>
+        </div>
+        <div class="phase-dot"><div class="dot"></div></div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div>
+              <div class="phase-num">Phase 04</div>
+              <div class="phase-title">自分のDSを完成させる</div>
+            </div>
+            <div class="phase-badge">実践</div>
+          </div>
+          <div class="phase-topics">
+            <div class="topic-item">このポートフォリオに適用</div>
+            <div class="topic-item">フィードバックを受けて改善</div>
+            <div class="topic-item">GitHub Pages で公開</div>
+            <div class="topic-item">README・チェンジログ整備</div>
+          </div>
+          <div class="phase-output">
+            <span class="output-icon">🚀</span>
+            <span>成果物：公開可能な自分のデザインシステム</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VISUAL DIAGRAMS -->
+    <div class="diagram-section">
+      <div class="section-title">
+        <h2>重要コンセプト図解</h2>
+        <p>Phase 2で学ぶ中心的なフレームワーク</p>
+      </div>
+
+      <!-- Atomic Design -->
+      <div class="atomic-diagram">
+        <h3>Atomic Design — コンポーネントの階層構造</h3>
+        <div class="atomic-levels">
+          <div class="atomic-level">
+            <div class="atomic-icon a1">⚛</div>
+            <div class="atomic-name">Atoms</div>
+            <div class="atomic-desc">最小単位<br>Button, Input<br>Icon, Label</div>
+          </div>
+          <div class="atomic-level">
+            <div class="atomic-icon a2">🔗</div>
+            <div class="atomic-name">Molecules</div>
+            <div class="atomic-desc">Atomの組み合わせ<br>Search Bar<br>Form Field</div>
+          </div>
+          <div class="atomic-level">
+            <div class="atomic-icon a3">🧬</div>
+            <div class="atomic-name">Organisms</div>
+            <div class="atomic-desc">複雑なUI<br>Navigation<br>Card Grid</div>
+          </div>
+          <div class="atomic-level">
+            <div class="atomic-icon a4">📐</div>
+            <div class="atomic-name">Templates</div>
+            <div class="atomic-desc">ページ骨格<br>Header+<br>Content+Footer</div>
+          </div>
+          <div class="atomic-level">
+            <div class="atomic-icon a5">🌐</div>
+            <div class="atomic-name">Pages</div>
+            <div class="atomic-desc">実際のページ<br>実データを<br>流し込んだもの</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design Tokens -->
+      <div class="token-diagram">
+        <h3>デザイントークン — 値を変数で管理する</h3>
+        <div class="token-grid">
+          <div class="token-group">
+            <div class="token-group-title">Color</div>
+            <div class="token-swatch" style="background:#C9A961;"></div>
+            <div class="token-label">--color-primary</div>
+            <div class="token-swatch" style="background:#F5F1EB; border:1px solid #E8E2D9;"></div>
+            <div class="token-label">--color-bg</div>
+            <div class="token-swatch" style="background:#2C2C2C;"></div>
+            <div class="token-label">--color-text</div>
+          </div>
+          <div class="token-group">
+            <div class="token-group-title">Typography</div>
+            <div class="token-type-box">
+              <span style="font-size:1.5rem; font-weight:700;">Aa</span>
+            </div>
+            <div class="token-label">--font-size-xl</div>
+            <div class="token-type-box">
+              <span style="font-size:1rem;">Aa</span>
+            </div>
+            <div class="token-label">--font-size-base</div>
+            <div class="token-type-box">
+              <span style="font-size:0.75rem;">Aa</span>
+            </div>
+            <div class="token-label">--font-size-sm</div>
+          </div>
+          <div class="token-group">
+            <div class="token-group-title">Spacing</div>
+            <div class="token-space-boxes">
+              <div class="space-box" style="width:8px;"></div>
+            </div>
+            <div class="token-label">--space-xs: 8px</div>
+            <div class="token-space-boxes">
+              <div class="space-box" style="width:16px;"></div>
+            </div>
+            <div class="token-label">--space-sm: 16px</div>
+            <div class="token-space-boxes">
+              <div class="space-box" style="width:32px;"></div>
+            </div>
+            <div class="token-label">--space-md: 32px</div>
+          </div>
+          <div class="token-group">
+            <div class="token-group-title">Shadow</div>
+            <div class="token-swatch" style="background:#FFF; border:1px solid #eee; box-shadow:0 1px 3px rgba(0,0,0,0.12);"></div>
+            <div class="token-label">--shadow-sm</div>
+            <div class="token-swatch" style="background:#FFF; border:1px solid #eee; box-shadow:0 4px 12px rgba(0,0,0,0.1);"></div>
+            <div class="token-label">--shadow-md</div>
+            <div class="token-swatch" style="background:#FFF; border:1px solid #eee; box-shadow:0 10px 30px rgba(0,0,0,0.15);"></div>
+            <div class="token-label">--shadow-lg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div class="section-title">
+      <h2>おすすめ学習リソース</h2>
+      <p>各フェーズで参考にすべき教材</p>
+    </div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-icon">📗</div>
+        <h4>Material Design 3</h4>
+        <p>Google製の最高のデザインシステム。トークン・コンポーネント全て無料で参照可能。</p>
+        <div class="resource-tags">
+          <span class="resource-tag">Phase 1</span>
+          <span class="resource-tag">無料</span>
+          <span class="resource-tag">リファレンス</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">🎓</div>
+        <h4>Figma Community</h4>
+        <p>既存DSのFigmaファイルを開いて構造を学べる。Design Tokensの実例多数あり。</p>
+        <div class="resource-tags">
+          <span class="resource-tag">Phase 2</span>
+          <span class="resource-tag">無料</span>
+          <span class="resource-tag">実例</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📦</div>
+        <h4>Storybook 公式ドキュメント</h4>
+        <p>コンポーネントカタログの作り方。チュートリアルが日本語対応されている。</p>
+        <div class="resource-tags">
+          <span class="resource-tag">Phase 3</span>
+          <span class="resource-tag">無料</span>
+          <span class="resource-tag">ツール</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">🎨</div>
+        <h4>Ant Design</h4>
+        <p>コンポーネントの設計思想がドキュメントに詳しく書かれている。実装の参考に最適。</p>
+        <div class="resource-tags">
+          <span class="resource-tag">Phase 2〜3</span>
+          <span class="resource-tag">無料</span>
+          <span class="resource-tag">OSSコード</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📺</div>
+        <h4>Kevin Powell (YouTube)</h4>
+        <p>CSSとデザインシステムの実装を英語で解説。実践的なCSS Custom Propertiesの使い方。</p>
+        <div class="resource-tags">
+          <span class="resource-tag">Phase 1〜3</span>
+          <span class="resource-tag">無料</span>
+          <span class="resource-tag">動画</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📖</div>
+        <h4>Atomic Design (書籍)</h4>
+        <p>Brad Frost著。Atomic Designの原典。無料でWeb版あり。Phase 2の前に読むべき。</p>
+        <div class="resource-tags">
+          <span class="resource-tag">Phase 2</span>
+          <span class="resource-tag">無料Web版</span>
+          <span class="resource-tag">書籍</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="tips">
+      <h3>2時間/日を効果的に使うコツ</h3>
+      <div class="tips-grid">
+        <div class="tip-item">
+          <div class="tip-num">1</div>
+          <div class="tip-text">最初の30分はインプット（読む・見る）、残り90分は手を動かす。読むだけでは身につかない。</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">2</div>
+          <div class="tip-text">このポートフォリオのCSSを改善しながら学ぶ。既にCSS変数が使われているので、実践しやすい。</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">3</div>
+          <div class="tip-text">Material Design などの実際のDSを「写経」する。なぜそのトークン値にしたか考えながら。</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-num">4</div>
+          <div class="tip-text">週末は振り返りと整理の時間に。ノートやFigmaでその週の学びをまとめることで定着する。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MILESTONE -->
+    <div class="what-is">
+      <h2>チェックポイント</h2>
+      <div style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
+        <label style="display:flex; align-items:center; gap:12px; font-size:0.9rem; cursor:pointer;">
+          <input type="checkbox" style="width:18px; height:18px; accent-color:var(--phase1);">
+          Week 2完了：自分のカラーパレットとタイポグラフィスケールを定義できた
+        </label>
+        <label style="display:flex; align-items:center; gap:12px; font-size:0.9rem; cursor:pointer;">
+          <input type="checkbox" style="width:18px; height:18px; accent-color:var(--phase2);">
+          Week 4完了：Atomic Designで10個以上のコンポーネントを設計できた
+        </label>
+        <label style="display:flex; align-items:center; gap:12px; font-size:0.9rem; cursor:pointer;">
+          <input type="checkbox" style="width:18px; height:18px; accent-color:var(--phase3);">
+          Week 6完了：Storybookまたは静的ページでコンポーネントカタログを公開できた
+        </label>
+        <label style="display:flex; align-items:center; gap:12px; font-size:0.9rem; cursor:pointer;">
+          <input type="checkbox" style="width:18px; height:18px; accent-color:var(--phase4);">
+          Week 7完了：このポートフォリオに自分のデザインシステムを適用できた
+        </label>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
